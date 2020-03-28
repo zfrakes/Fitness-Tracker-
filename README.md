@@ -19,7 +19,7 @@ npm install
 
 run node server.js 
  
-Fitness Tracker [live demo link]()
+Fitness Tracker [live demo link](https://zfrakes.github.io/Fitness-Tracker-/)
 
 ## Author
 

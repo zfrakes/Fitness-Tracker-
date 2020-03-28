@@ -32,7 +32,7 @@ app.get("/exercise", (req, res) => {
         name:req.body.name,
         type:req.body.type,
         weight:req.body.weight,
-        sets:req.body.set,
+        sets:req.body.sets,
         reps:req.body.reps,
         duration:req.body.duration,
         distance:req.body.distance,
@@ -49,6 +49,18 @@ app.get("/exercise", (req, res) => {
     })      
   });
   app.get("/api/workouts", (req, res) => {
+    Workout.find({}, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(data);
+      }
+    });
+  });
+  app.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/stats.html'));
+  });
+  app.get("/api/workouts/range", (req, res) => {
     Workout.find({}, (err, data) => {
       if (err) {
         console.log(err);
