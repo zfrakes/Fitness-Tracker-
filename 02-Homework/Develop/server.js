@@ -12,7 +12,7 @@ app.use(express.static("public"));
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/FitnessTracker", { useNewUrlParser: true });
 app.post("/api/workouts", ({body}, res) => {
   const workout = new Workout(body);
-  workout.lastUpdatedDate();
+  workout.setDate();
   Workout.create(workout)
     .then(dbWorkout => {
       res.json(dbWorkout);
@@ -35,7 +35,9 @@ app.get("/exercise", (req, res) => {
         sets:req.body.set,
         reps:req.body.reps,
         duration:req.body.duration,
-        })
+        distance:req.body.distance,
+        });
+        workout.setTotalDuration();
         workout.save(function(err){
           if (err){
            console.log(err);
@@ -45,6 +47,15 @@ app.get("/exercise", (req, res) => {
          })
        }
     })      
+  });
+  app.get("/api/workouts", (req, res) => {
+    Workout.find({}, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(data);
+      }
+    });
   });
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);

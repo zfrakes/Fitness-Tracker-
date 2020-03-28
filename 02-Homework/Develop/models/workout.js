@@ -27,15 +27,31 @@ exercises: [
     duration: {
     type: Number,
     default: 0
-  }
+  },
+    distance: {
+    type: Number,
+    default: 0
+  },
 }
 ],
-  lastUpdated: Date,
+  day:Date,
+  
+  totalDuration:Number, 
+
+  
 });
 
-WorkoutSchema.methods.lastUpdatedDate = function() {
-  this.lastUpdated = Date.now();
-  return this.lastUpdated;
+WorkoutSchema.methods.setDate = function() {
+  this.day = Date.now();
+  return this.day;
+};
+WorkoutSchema.methods.setTotalDuration = function() {
+  let totalDuration = 0;
+  this.exercises.forEach(exercise => {
+    totalDuration = totalDuration + exercise.duration;  
+  });
+  this.totalDuration = totalDuration;
+  return this.totalDuration;
 };
 const Workout = mongoose.model("Workout", WorkoutSchema);
 module.exports = Workout;
