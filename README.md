@@ -19,7 +19,7 @@ npm install
 
 run node server.js 
  
-Fitness Tracker [live demo link]()
+Fitness Tracker [live demo link](https://fitness-trackerzf.herokuapp.com/)
 
 ## Author
 
